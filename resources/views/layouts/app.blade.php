@@ -77,6 +77,8 @@
         </div>
     </nav>
 
+    @include('components.flash_messages')
+
     @yield('content')
 
     <!-- Scripts -->
