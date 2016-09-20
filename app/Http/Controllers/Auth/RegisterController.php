@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Mail\RegisterConfirmation;
-use App\User;
+use App\Entities\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -11,6 +11,8 @@ use Mail;
 use Illuminate\Http\Request;
 use Redirect;
 use Session;
+use App\Repositories\UserRepository;
+use Lang;
 
 class RegisterController extends Controller
 {
@@ -95,9 +97,25 @@ class RegisterController extends Controller
             'confirmation_code' => $confirmationCode
         ]);
 
-        Mail::to($data['email'])->send(new RegisterConfirmation());
+        Mail::to($data['email'])->send(new RegisterConfirmation($user));
 
-        Session::flash('flash_message', 'Thanks for signing up! Please check your email.');
+        Session::flash('flash_message', Lang::get('auth.thanks-check-email'));
 
+    }
+
+    public function confirm($token, UserRepository $repository) {
+
+        $user = $repository->getUserToConfirm($token);
+        if($user) {
+            $user->active = 1;
+            $user->verified = 1;
+            $user->confirmation_code = null;
+            $user->save();
+
+            Session::flash('flash_message', Lang::get('auth.email-confirm-successful'));
+        } else {
+            Session::flash('flash_message', Lang::get('auth.invalid-confirmation-link'));
+        }
+        return redirect()->route('login');
     }
 }

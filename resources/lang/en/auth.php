@@ -16,4 +16,10 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'thanks-check-email' => 'Thanks for signing up! Please check your email.',
+    'email-confirm-successful' => 'Your email has been confirmed successful!',
+    'invalid-confirmation-link' => 'This is an invalid confirmation link!',
+
+    'email-subject-register-confirmation' => 'Register Confirmation!!',
+
 ];

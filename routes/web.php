@@ -24,7 +24,7 @@ Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout'
 // Registration Routes...
 Route::get('register', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
 Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
-Route::get('register/confirm/{token}', ['as' => 'register.post', 'uses' => 'RegistrationController@confirmEmail']);
+Route::get('register/confirm/{token}', ['as' => 'register.confirm', 'uses' => 'Auth\RegisterController@confirm']);
 
 // Password Reset Routes...
 Route::get('password/reset', ['as' => 'password.reset', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
