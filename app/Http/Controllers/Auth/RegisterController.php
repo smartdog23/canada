@@ -13,6 +13,7 @@ use Redirect;
 use Session;
 use App\Repositories\UserRepository;
 use Lang;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -46,6 +47,11 @@ class RegisterController extends Controller
     {
         $this->request = $request;
         $this->middleware('guest');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('front');
     }
 
     /**
