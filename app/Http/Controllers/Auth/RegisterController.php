@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Mail;
 use Illuminate\Http\Request;
 use Redirect;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -70,10 +71,10 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-//        $this->guard()->login($this->create($request->all()));
         $this->create($request->all());
 
-        return redirect($this->redirectPath());
+//        return redirect($this->redirectPath());
+        return redirect()->route('login');
     }
 
     /**
@@ -96,8 +97,7 @@ class RegisterController extends Controller
 
         Mail::to($data['email'])->send(new RegisterConfirmation());
 
-        $this->request->session()->flash('message', 'Thanks for signing up! Please check your email.');
+        Session::flash('flash_message', 'Thanks for signing up! Please check your email.');
 
-        return Redirect::home();
     }
 }
