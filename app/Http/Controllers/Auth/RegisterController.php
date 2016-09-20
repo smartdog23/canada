@@ -86,7 +86,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        $confirmationCode = str_random(30);
+        $confirmationCode = str_random(40);
 
         $user = User::create([
             'name' => $data['name'],
