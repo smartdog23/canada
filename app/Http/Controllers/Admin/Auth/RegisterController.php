@@ -35,7 +35,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/home';
     protected $request;
 
     /**
@@ -46,7 +46,22 @@ class RegisterController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->middleware('guest');
+        $this->middleware('auth:admin');
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('admin.auth.register');
     }
 
     /**
@@ -77,7 +92,7 @@ class RegisterController extends Controller
         $this->create($request->all());
 
 //        return redirect($this->redirectPath());
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 
     /**
@@ -117,6 +132,6 @@ class RegisterController extends Controller
         } else {
             Session::flash('flash_message', Lang::get('auth.invalid-confirmation-link'));
         }
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 }

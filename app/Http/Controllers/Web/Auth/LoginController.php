@@ -51,4 +51,14 @@ class LoginController extends Controller
         $credentials['active'] = true;
         return $credentials;
     }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('web.auth.login');
+    }
 }

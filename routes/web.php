@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => 'login', 'uses' => 'Web\Controller@index']);
+Route::get('/', ['as' => 'login', 'uses' => 'Web\HomeController@welcome']);
 
 
 //Auth::routes();
