@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Web\Auth;
 
 use App\Mail\RegisterConfirmation;
 use App\Entities\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Web\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Mail;
 use Illuminate\Http\Request;
@@ -47,11 +47,6 @@ class RegisterController extends Controller
     {
         $this->request = $request;
         $this->middleware('guest');
-    }
-
-    protected function guard()
-    {
-        return Auth::guard('front');
     }
 
     /**
