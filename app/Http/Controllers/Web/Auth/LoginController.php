@@ -61,4 +61,15 @@ class LoginController extends Controller
     {
         return view('web.auth.login');
     }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        //return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        return '/home';
+    }
 }
