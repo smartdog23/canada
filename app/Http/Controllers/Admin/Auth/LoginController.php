@@ -27,6 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
+    protected $loginPath = '/admin/login';
     protected $redirectTo = '/admin/home';
 
     /**
